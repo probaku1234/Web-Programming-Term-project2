@@ -1,0 +1,28 @@
+#name {
+  position: fixed;
+}
+
+#button {
+  top: 52px;
+  right: 60px;
+  width: 35px;
+  position: fixed;
+  z-index: 50;
+  height: 35px;
+}
+
+.asdf {
+  background-color: red;
+  width: 100px;
+  height: 1500px;
+}
+
+.naviMenu {
+  top: 0px;
+  bottom: 0px;
+  right: 1px;
+  position: fixed;
+  margin-right: 5px;
+  z-index: 50;
+  width: 83px;
+}
