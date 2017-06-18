@@ -19,7 +19,7 @@ $(document).ready(function() {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
-    // ...
+    // alert error message
     alert("errorCode : " + errorCode + ", message : " + errorMessage);
   });
 
@@ -69,7 +69,7 @@ $(document).ready(function() {
 
   // when click proejct btn, go to project div
   $("#projectbtn").click(function() {
-
+    $(window).scrollTo('.footer');
   });
 
   // when click contact btn, go to footer div
