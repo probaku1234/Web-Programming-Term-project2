@@ -11,6 +11,19 @@ $(document).ready(function() {
   };
   firebase.initializeApp(config);
 
+  var database = firebase.database();
+
+  var provider = new firebase.auth.GoogleAuthProvider();
+
+  firebase.auth().signInWithEmailAndPassword("probaku1234@naver.com", "qazwsxedC1").catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ...
+    alert("errorCode : " + errorCode + ", message : " + errorMessage);
+  });
+
+
 // when send button click, open default email client
   $(".sendMail").click(function() {
     console.log("fucl");
@@ -24,8 +37,19 @@ $(document).ready(function() {
   // when authenticate button click, check the key
   // if the key is right, show the input data page in admin section
   $("#authenBtn").click(function() {
-    var key = prompt("Please enter the key", "key");
-    // save the inout data in database
+    var input = prompt("Enter the key", "key");
+
+    firebase.database().ref('/token').once('value', function(snapshot) {
+      var token = snapshot.val();
+      if (token == input)
+      {
+        alert("Authentication Success");
+      }
+      else
+      {
+        alert("Authentication Failed : " + input);
+      }
+    });
   });
 
   // when menu button click, toggle modal page
