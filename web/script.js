@@ -77,6 +77,10 @@ $(document).ready(function() {
 
   });
 
+  $("#datainputBtn").click(function() {
+    $('#start').append("<li><span>fuck</span></li>");
+  });
+
   // when click contact btn, go to footer div
   $("#contactbtn").click(function() {
     $(".modal").fadeOut();
