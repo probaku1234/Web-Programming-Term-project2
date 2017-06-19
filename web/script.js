@@ -1,5 +1,6 @@
 $(document).ready(function() {
   var toggle = 0;
+
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyDn62-NVZ4eWNAY1D-z0B6LaHey26N5xFM",
@@ -22,7 +23,6 @@ $(document).ready(function() {
     // alert error message
     alert("errorCode : " + errorCode + ", message : " + errorMessage);
   });
-
 
 // when send button click, open default email client
   $(".sendMail").click(function() {
@@ -69,13 +69,23 @@ $(document).ready(function() {
 
   // when click proejct btn, go to project div
   $("#projectbtn").click(function() {
-    $(window).scrollTo('.footer');
+    $(".modal").fadeOut();
+    toggle = 0;
+    document.getElementsByClassName("menuWrapper")[0].classList.toggle("change");
+    var x = document.getElementsByClassName("project");
+    x[0].scrollIntoView(true);
+
   });
 
   // when click contact btn, go to footer div
   $("#contactbtn").click(function() {
-
+    $(".modal").fadeOut();
+    toggle = 0;
+    document.getElementsByClassName("menuWrapper")[0].classList.toggle("change");
+    var x = document.getElementsByClassName("footer");
+    x[0].scrollIntoView(true);
   });
+
 });
 
 // when input data in admin section, create div in test div and index button in proejctbtn div
