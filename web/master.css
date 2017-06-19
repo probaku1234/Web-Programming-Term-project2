@@ -12,15 +12,7 @@ body {
   color: white;
 }
 
-#button {
-  top: 52px;
-  right: 60px;
-  width: 35px;
-  position: fixed;
-  z-index: 50;
-  height: 35px;
-}
-
+/* navimenu start */
 .naviMenu {
   top: 0px;
   bottom: 0px;
@@ -46,6 +38,7 @@ body {
   z-index: 50;
 }
 
+/* define animation */
 .change .bar1 {
     -webkit-transform: rotate(-45deg) translate(-9px, 6px) ;
     transform: rotate(-45deg) translate(-9px, 6px) ;
@@ -57,7 +50,9 @@ body {
     -webkit-transform: rotate(45deg) translate(-8px, -8px) ;
     transform: rotate(45deg) translate(-8px, -8px) ;
 }
+/* naviMenu end*/
 
+/* modal start */
 .modal {
   position: fixed;
   display: none;
@@ -91,12 +86,16 @@ body {
   color: white;
   font-size: 50px;
 }
+/* modal end */
 
-.test {
-  height: 600px;
+/* project start */
+.project {
+  height: 1000px;
   background-color: grey;
 }
+/* project end */
 
+/* footer start*/
 .footer {
   display: flex;
   background-color: rgb(240, 240, 245);
@@ -116,13 +115,17 @@ h6 {
   font: normal normal normal 15px/1.4em helvetica-w01-light,helvetica-w02-light,sans-serif;
 color: #ADADAC;
 }
+/* footer end*/
 
+/* admin start */
 .admin {
   background-color: green;
   width: 100%;
   height: 100px;
 }
+/* admin end */
 
+/* email start*/
 .email {
   background-color: #b3e6ff;
 }
@@ -146,3 +149,4 @@ input {
   width: 100%;
   padding: 0px;
 }
+/* email start*/
