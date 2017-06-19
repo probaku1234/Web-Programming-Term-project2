@@ -1,7 +1,7 @@
 body {
-    font-size: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0px;
+  font-size: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0px;
 }
 
 #name {
@@ -39,21 +39,49 @@ body {
   z-index: 50;
 }
 
+
 /* define animation */
 .change .bar1 {
-    -webkit-transform: rotate(-45deg) translate(-9px, 6px) ;
-    transform: rotate(-45deg) translate(-9px, 6px) ;
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
 }
 
-.change .bar2 {opacity: 0;}
+.change .bar2 {
+  opacity: 0;
+}
 
 .change .bar3 {
-    -webkit-transform: rotate(45deg) translate(-8px, -8px) ;
-    transform: rotate(45deg) translate(-8px, -8px) ;
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.projectindexBtnWrapper {
+  display: table;
+  height: 100%;
+}
+
+.projectindexBtn {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  list-style: none;
+}
+
+svg {
+  width: 24px;
+  height: 24px;
+}
+
+circle {
+  stroke: black;
+  stroke-width: 3;
+  fill : white;
 }
 /* naviMenu end*/
 
+
 /* modal start */
+
 .modal {
   position: fixed;
   display: none;
@@ -89,16 +117,24 @@ body {
   color: white;
   font-size: 50px;
 }
+
+
 /* modal end */
 
+
 /* project start */
+
 .project {
   height: 1000px;
   background-color: grey;
 }
+
+
 /* project end */
 
-/* footer start*/
+
+/* footer start */
+
 .footer {
   display: flex;
   background-color: rgb(240, 240, 245);
@@ -111,24 +147,32 @@ body {
 }
 
 h5 {
-  font: normal normal normal 22px/1.4em helvetica-w01-light,helvetica-w02-light,sans-serif;
+  font: normal normal normal 22px/1.4em helvetica-w01-light, helvetica-w02-light, sans-serif;
 }
 
 h6 {
-  font: normal normal normal 15px/1.4em helvetica-w01-light,helvetica-w02-light,sans-serif;
-color: #ADADAC;
+  font: normal normal normal 15px/1.4em helvetica-w01-light, helvetica-w02-light, sans-serif;
+  color: #ADADAC;
 }
-/* footer end*/
+
+
+/* footer end */
+
 
 /* admin start */
+
 .admin {
   background-color: green;
   width: 100%;
   height: 100px;
 }
+
+
 /* admin end */
 
-/* email start*/
+
+/* email start */
+
 .email {
   background-color: #b3e6ff;
 }
@@ -144,6 +188,7 @@ color: #ADADAC;
 table {
   margin-top: 20px;
 }
+
 td {
   width: 50%;
 }
@@ -152,4 +197,6 @@ input {
   width: 100%;
   padding: 0px;
 }
-/* email start*/
+
+
+/* email end */
