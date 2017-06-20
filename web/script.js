@@ -32,7 +32,17 @@ $(document).ready(function() {
     console.log("projectNum : " + prjNum);
   });
 
-  // TODO: Read proejct data and make project div
+  for (var i = 1; i <= prjNum; i++)
+  {
+    // TODO: Read proejct data and make project div
+    /*
+    storageRef.child('md/' + i + 'README.md').getDownloadURL().then(function(url) {
+      //displayInfo(url);
+    }).catch(function(error) {
+      conlsole.log(error);
+    });
+    */
+  }
 
   // when send button click, open default email client
   $(".sendMail").click(function() {
