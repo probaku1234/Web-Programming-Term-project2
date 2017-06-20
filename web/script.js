@@ -16,6 +16,7 @@ $(document).ready(function() {
 
   var provider = new firebase.auth.GoogleAuthProvider();
 
+  // Authenticate by email and password
   firebase.auth().signInWithEmailAndPassword("probaku1234@naver.com", "qazwsxedC1").catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
@@ -24,7 +25,7 @@ $(document).ready(function() {
     alert("errorCode : " + errorCode + ", message : " + errorMessage);
   });
 
-// when send button click, open default email client
+  // when send button click, open default email client
   $(".sendMail").click(function() {
     console.log("fucl");
     var email = 'probaku1234@naver.com';
@@ -41,12 +42,9 @@ $(document).ready(function() {
 
     firebase.database().ref('/token').once('value', function(snapshot) {
       var token = snapshot.val();
-      if (token == input)
-      {
+      if (token == input) {
         alert("Authentication Success");
-      }
-      else
-      {
+      } else {
         alert("Authentication Failed : " + input);
       }
     });
@@ -55,13 +53,10 @@ $(document).ready(function() {
   // when menu button click, toggle modal page
   $(".menuWrapper").click(function() {
     this.classList.toggle("change");
-    if (toggle == 0)
-    {
+    if (toggle == 0) {
       $(".modal").fadeIn();
       toggle = 1;
-    }
-    else
-    {
+    } else {
       $(".modal").fadeOut();
       toggle = 0;
     }
@@ -74,11 +69,11 @@ $(document).ready(function() {
     document.getElementsByClassName("menuWrapper")[0].classList.toggle("change");
     var x = document.getElementsByClassName("project");
     x[0].scrollIntoView(true);
-
   });
 
   $("#datainputBtn").click(function() {
     $('#start').append("<li><span>fuck</span></li>");
+    displayInfo();
   });
 
   // when click contact btn, go to footer div
@@ -94,5 +89,17 @@ $(document).ready(function() {
 
 // when input data in admin section, create div in test div and index button in proejctbtn div
 function displayInfo() {
-
+  $.ajax({
+    url: "./md/REAME.md",
+    context: document.body,
+    success: function(mdText) {
+      //where text will be the text returned by the ajax call
+      var converter = new showdown.Converter();
+      var htmlText = converter.makeHtml(mdText);
+      $(".outputDiv").append(htmlText); //append this to a div with class outputDiv
+    },
+    error: function(request, status, error) {
+      alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+    }
+  });
 }
