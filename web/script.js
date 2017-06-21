@@ -139,7 +139,6 @@ $(document).ready(function() {
 
 // when input data in admin section, create div in test div and index button in proejctbtn div
 function displayInfo(url, index) {
-  var projecturl = getProjectURL(index);
   $.ajax({
     url: url,
     context: document.body,
@@ -147,7 +146,9 @@ function displayInfo(url, index) {
       //where text will be the text returned by the ajax call
       var converter = new showdown.Converter();
       var htmlText = converter.makeHtml(mdText);
-      $(".project").append("<a name='" + index + "'></a><div class='outputDiv'>" + htmlText + "<a href='" + projecturl + "'><p class='projectLink'>GO TO PROJECT</p></a></div>"); //append this to a div with class outputDiv
+      firebase.database().ref('/' + index).once('value', function(snapshot) {
+        $(".project").append("<a name='" + index + "'></a><div class='outputDiv'>" + htmlText + "<a href='" + snapshot.val() + "'><p class='projectLink'>GO TO PROJECT</p></a></div>"); //append this to a div with class outputDiv
+      });
     },
     error: function(request, status, error) {
       alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
@@ -164,9 +165,7 @@ function downloadREADMEFile(storageRef, prjNum) {
 }
 
 function getProjectURL(index) {
-  var url;
   firebase.database().ref('/' + index).once('value', function(snapshot) {
-    url = snapshot.val();
+    var projecturl = snapshot.val();
   });
-  return url;
 }
