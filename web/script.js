@@ -32,8 +32,7 @@ $(document).ready(function() {
     console.log("projectNum : " + prjNum);
   });
 
-  for (var i = 1; i <= prjNum; i++)
-  {
+  for (var i = 0; i < prjNum; i++) {
     // TODO: Read proejct data and make project div
     /*
     downloadREADMEFile(storageRef, i);
@@ -59,6 +58,7 @@ $(document).ready(function() {
       var token = snapshot.val();
       if (token == input) {
         alert("Authentication Success");
+        $('.datainputDiv').css('display', 'block');
       } else {
         alert("Authentication Failed : " + input);
       }
@@ -70,11 +70,11 @@ $(document).ready(function() {
     this.classList.toggle("change");
     if (toggle == 0) {
       $(".modal").fadeIn();
-      $('.projectindexBtnWrapper').css('display','none');
+      $('.projectindexBtnWrapper').css('display', 'none');
       toggle = 1;
     } else {
       $(".modal").fadeOut();
-      $('.projectindexBtnWrapper').css('display','table');
+      $('.projectindexBtnWrapper').css('display', 'table');
       toggle = 0;
     }
   });
@@ -93,29 +93,39 @@ $(document).ready(function() {
     $('#start').append("<li><span>fuck</span></li>"); // Create Index button
 
     var fileObject = document.getElementById("fileinput");
+    var projectUrl = document.getElementById("urlinput").value;
 
     // TODO: upload file to firebase
-    if (fileObject != undefined)
-    {
-      prjNum++;
+    if (fileObject.files.length != 0 && projectUrl != "") {
+      // TODO: Save project url
+      firebase.database().ref('/' + prjNum).set(projectUrl);
+
+      /*
+      var uploadTask = storageRef.child('md/' + prjNum + 'README.md').put(fileObject.files[0]);
+
+      uploadTask.on('state_changed', function(snapshot) {
+          console.log("pikapika");
+          }, function(error) {
+            console.log(error);
+          }, function() {
+            console.log("Successfully uploaded to firebase");
+          }
+      );
+
       // TODO: update prjNum
       var update = {};
       update['/projectNum'] = prjNum;
       firebase.database().ref().update(update);
 
-      var uploadTask = storageRef.child('md/' + prjNum + 'README.md').put(fileObject.files[0]);
 
-      uploadTask.on('state_changed', function(snapshot) {
-        console.log("pikapika");
-      }, function(error) {
-        console.log(error);
-      }, function() {
-        console.log("Successfully uploaded to firebase");
-      });
+      prjNum++;
+      */
+    } else {
+      alert("Please select the file and input the project url");
     }
 
     // TODO: Read README.md file and display to proejct div
-    downloadREADMEFile(storageRef, prjNum);
+    //downloadREADMEFile(storageRef, prjNum);
 
   });
 
@@ -152,4 +162,12 @@ function downloadREADMEFile(storageRef, prjNum) {
   }).catch(function(error) {
     conlsole.log(error);
   });
+}
+
+function getProjectURL(index) {
+  var url;
+  firebase.database().ref('/' + index).once('value', function(snapshot) {
+    url = snapshot.val();
+  });
+  return url;
 }
