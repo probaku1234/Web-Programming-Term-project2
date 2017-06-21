@@ -33,8 +33,10 @@ $(document).ready(function() {
     for (var i = 0; i < prjNum; i++) {
       // TODO: Read proejct data and make project div
       downloadREADMEFile(storageRef, i);
+      $('#start').append("<li><a href='#" + i + "'><svg><circle cx='12' cy='12' r='7'></circle></svg></a></li>");
     }
   });
+
 
   // when send button click, open default email client
   $(".sendMail").click(function() {
@@ -87,7 +89,8 @@ $(document).ready(function() {
 
   // when click datainputBtn, upload README.md file
   $("#datainputBtn").click(function() {
-    $('#start').append("<li><span>fuck</span></li>"); // Create Index button
+    $('#start').append("<li><a href='#" + prjNum + "'><svg><circle cx='12' cy='12' r='7'></circle></svg></a></li>"); // Create Index button
+
 
     var fileObject = document.getElementById("fileinput");
     var projectUrl = document.getElementById("urlinput").value;
@@ -120,8 +123,6 @@ $(document).ready(function() {
     } else {
       alert("Please select the file and input the project url");
     }
-
-
   });
 
   // when click contact btn, go to footer div
