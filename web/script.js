@@ -100,7 +100,7 @@ $(document).ready(function() {
       // TODO: Save project url
       firebase.database().ref('/' + prjNum).set(projectUrl);
 
-      /*
+
       var uploadTask = storageRef.child('md/' + prjNum + 'README.md').put(fileObject.files[0]);
 
       uploadTask.on('state_changed', function(snapshot) {
@@ -112,20 +112,18 @@ $(document).ready(function() {
           }
       );
 
+      // TODO: Read README.md file and display to proejct div
+      downloadREADMEFile(storageRef, prjNum);
+
+      prjNum++;
       // TODO: update prjNum
       var update = {};
       update['/projectNum'] = prjNum;
       firebase.database().ref().update(update);
-
-
-      prjNum++;
-      */
     } else {
       alert("Please select the file and input the project url");
     }
 
-    // TODO: Read README.md file and display to proejct div
-    //downloadREADMEFile(storageRef, prjNum);
 
   });
 
@@ -141,6 +139,7 @@ $(document).ready(function() {
 
 // when input data in admin section, create div in test div and index button in proejctbtn div
 function displayInfo(url, index) {
+  var projecturl = getProjectURL(index);
   $.ajax({
     url: url,
     context: document.body,
@@ -148,7 +147,7 @@ function displayInfo(url, index) {
       //where text will be the text returned by the ajax call
       var converter = new showdown.Converter();
       var htmlText = converter.makeHtml(mdText);
-      $(".project").append("<a name='" + index + "'></a><div class='outputDiv'>" + htmlText + "</div>"); //append this to a div with class outputDiv
+      $(".project").append("<a name='" + index + "'></a><div class='outputDiv'>" + htmlText + "<a href='" + projecturl + "'><p class='projectLink'>GO TO PROJECT</p></a></div>"); //append this to a div with class outputDiv
     },
     error: function(request, status, error) {
       alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
