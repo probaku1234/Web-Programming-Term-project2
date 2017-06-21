@@ -36,11 +36,7 @@ $(document).ready(function() {
   {
     // TODO: Read proejct data and make project div
     /*
-    storageRef.child('md/' + i + 'README.md').getDownloadURL().then(function(url) {
-      //displayInfo(url);
-    }).catch(function(error) {
-      conlsole.log(error);
-    });
+    downloadREADMEFile(storageRef, i);
     */
   }
 
@@ -92,12 +88,12 @@ $(document).ready(function() {
     x[0].scrollIntoView(true);
   });
 
+  // when click datainputBtn, upload README.md file
   $("#datainputBtn").click(function() {
     $('#start').append("<li><span>fuck</span></li>"); // Create Index button
 
     var fileObject = document.getElementById("fileinput");
-    //var path = document.getElementById("fileinput").value;
-    $(".outputDiv").append(fileObject);
+
     // TODO: upload file to firebase
     if (fileObject != undefined)
     {
@@ -119,13 +115,8 @@ $(document).ready(function() {
     }
 
     // TODO: Read README.md file and display to proejct div
-    /*
-    storageRef.child('md/README.md').getDownloadURL().then(function(url) {
-      //displayInfo(url);
-    }).catch(function(error) {
-      conlsole.log(error);
-    });
-    */
+    downloadREADMEFile(storageRef, prjNum);
+
   });
 
   // when click contact btn, go to footer div
@@ -139,7 +130,7 @@ $(document).ready(function() {
 });
 
 // when input data in admin section, create div in test div and index button in proejctbtn div
-function displayInfo(url) {
+function displayInfo(url, index) {
   $.ajax({
     url: url,
     context: document.body,
@@ -147,10 +138,18 @@ function displayInfo(url) {
       //where text will be the text returned by the ajax call
       var converter = new showdown.Converter();
       var htmlText = converter.makeHtml(mdText);
-      $(".project").append("<div class='outputDiv'>" + htmlText + "</div>"); //append this to a div with class outputDiv
+      $(".project").append("<a name='" + index + "'></a><div class='outputDiv'>" + htmlText + "</div>"); //append this to a div with class outputDiv
     },
     error: function(request, status, error) {
       alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
     }
+  });
+}
+
+function downloadREADMEFile(storageRef, prjNum) {
+  storageRef.child('md/' + prjNum + 'README.md').getDownloadURL().then(function(url) {
+    displayInfo(url, prjNum);
+  }).catch(function(error) {
+    conlsole.log(error);
   });
 }
