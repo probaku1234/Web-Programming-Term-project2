@@ -101,7 +101,7 @@ $(document).ready(function() {
       firebase.database().ref('/' + prjNum).set(projectUrl);
 
 
-      var uploadTask = storageRef.child('md/' + prjNum + 'README.md').put(fileObject.files[0]);
+      var uploadTask = storageRef.child("/" + prjNum + 'README.md').put(fileObject.files[0]);
 
       uploadTask.on('state_changed', function(snapshot) {
           console.log("pikapika");
@@ -110,17 +110,20 @@ $(document).ready(function() {
           }, function() {
             console.log("Successfully uploaded to firebase");
             // TODO: Read README.md file and display to proejct div
+            console.log(prjNum);
             downloadREADMEFile(storageRef, prjNum);
+            
+            prjNum++;
+            // TODO: update prjNum
+            var update = {};
+            update['/projectNum'] = prjNum;
+            firebase.database().ref().update(update);
           }
       );
 
 
 
-      prjNum++;
-      // TODO: update prjNum
-      var update = {};
-      update['/projectNum'] = prjNum;
-      firebase.database().ref().update(update);
+
     } else {
       alert("Please select the file and input the project url");
     }
@@ -156,7 +159,7 @@ function displayInfo(url, index) {
 }
 
 function downloadREADMEFile(storageRef, prjNum) {
-  storageRef.child('md/' + prjNum + 'README.md').getDownloadURL().then(function(url) {
+  storageRef.child("/" + prjNum + 'README.md').getDownloadURL().then(function(url) {
     displayInfo(url, prjNum);
   }).catch(function(error) {
     console.log(error);
