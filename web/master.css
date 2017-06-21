@@ -186,6 +186,10 @@ h6 {
   background-color: #b3e6ff;
 }
 
+#emailhead {
+  margin: 0px;
+}
+
 #textinput {
   height: 100%;
 }
@@ -204,7 +208,6 @@ td {
 
 input {
   width: 100%;
-  padding: 0px;
 }
 
 

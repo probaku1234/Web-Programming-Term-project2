@@ -109,11 +109,12 @@ $(document).ready(function() {
             console.log(error);
           }, function() {
             console.log("Successfully uploaded to firebase");
+            // TODO: Read README.md file and display to proejct div
+            downloadREADMEFile(storageRef, prjNum);
           }
       );
 
-      // TODO: Read README.md file and display to proejct div
-      downloadREADMEFile(storageRef, prjNum);
+
 
       prjNum++;
       // TODO: update prjNum
@@ -158,6 +159,6 @@ function downloadREADMEFile(storageRef, prjNum) {
   storageRef.child('md/' + prjNum + 'README.md').getDownloadURL().then(function(url) {
     displayInfo(url, prjNum);
   }).catch(function(error) {
-    conlsole.log(error);
+    console.log(error);
   });
 }
