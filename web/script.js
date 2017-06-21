@@ -30,14 +30,11 @@ $(document).ready(function() {
   firebase.database().ref('/projectNum').once('value', function(snapshot) {
     prjNum = snapshot.val();
     console.log("projectNum : " + prjNum);
+    for (var i = 0; i < prjNum; i++) {
+      // TODO: Read proejct data and make project div
+      downloadREADMEFile(storageRef, i);
+    }
   });
-
-  for (var i = 0; i < prjNum; i++) {
-    // TODO: Read proejct data and make project div
-    /*
-    downloadREADMEFile(storageRef, i);
-    */
-  }
 
   // when send button click, open default email client
   $(".sendMail").click(function() {
@@ -161,11 +158,5 @@ function downloadREADMEFile(storageRef, prjNum) {
     displayInfo(url, prjNum);
   }).catch(function(error) {
     conlsole.log(error);
-  });
-}
-
-function getProjectURL(index) {
-  firebase.database().ref('/' + index).once('value', function(snapshot) {
-    var projecturl = snapshot.val();
   });
 }
