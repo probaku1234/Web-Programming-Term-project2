@@ -127,6 +127,7 @@ circle {
 .project {
   min-height: 200px;
   background-color: grey;
+  overflow-x: hidden;
 }
 
 .outputDiv {

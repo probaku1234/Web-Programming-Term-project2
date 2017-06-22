@@ -40,12 +40,12 @@ $(document).ready(function() {
 
   // when send button click, open default email client
   $(".sendMail").click(function() {
-    console.log("fucl");
     var email = 'probaku1234@naver.com';
     var subject = 'Test';
     var emailBody = 'Hi Sample,';
     var attach = 'path';
-    document.location = "mailto:" + email;
+    document.location = "mailto:"+email+"?subject="+subject+"&body="+emailBody+
+            "?attach="+attach;
   });
 
   // when authenticate button click, check the key
@@ -81,9 +81,20 @@ $(document).ready(function() {
   // when click proejct btn, go to project div
   $("#projectbtn").click(function() {
     $(".modal").fadeOut();
+    $('.projectindexBtnWrapper').css('display', 'table');
     toggle = 0;
     document.getElementsByClassName("menuWrapper")[0].classList.toggle("change");
     var x = document.getElementsByClassName("project");
+    x[0].scrollIntoView(true);
+  });
+
+  // when click contact btn, go to footer div
+  $("#contactbtn").click(function() {
+    $(".modal").fadeOut();
+    $('.projectindexBtnWrapper').css('display', 'table');
+    toggle = 0;
+    document.getElementsByClassName("menuWrapper")[0].classList.toggle("change");
+    var x = document.getElementsByClassName("footer");
     x[0].scrollIntoView(true);
   });
 
@@ -91,51 +102,37 @@ $(document).ready(function() {
   $("#datainputBtn").click(function() {
     $('#start').append("<li><a href='#" + prjNum + "'><svg><circle cx='12' cy='12' r='7'></circle></svg></a></li>"); // Create Index button
 
-
     var fileObject = document.getElementById("fileinput");
     var projectUrl = document.getElementById("urlinput").value;
 
-    // TODO: upload file to firebase
+    // check the input value
     if (fileObject.files.length != 0 && projectUrl != "") {
       // TODO: Save project url
       firebase.database().ref('/' + prjNum).set(projectUrl);
 
-
       var uploadTask = storageRef.child("/" + prjNum + 'README.md').put(fileObject.files[0]);
 
+      // TODO: upload file to firebase
       uploadTask.on('state_changed', function(snapshot) {
           console.log("pikapika");
           }, function(error) {
             console.log(error);
           }, function() {
             console.log("Successfully uploaded to firebase");
-            // TODO: Read README.md file and display to proejct div
             console.log(prjNum);
+            // TODO: Read README.md file and display to proejct div
             downloadREADMEFile(storageRef, prjNum);
-            
-            prjNum++;
+
             // TODO: update prjNum
+            prjNum++;
             var update = {};
             update['/projectNum'] = prjNum;
             firebase.database().ref().update(update);
           }
       );
-
-
-
-
     } else {
       alert("Please select the file and input the project url");
     }
-  });
-
-  // when click contact btn, go to footer div
-  $("#contactbtn").click(function() {
-    $(".modal").fadeOut();
-    toggle = 0;
-    document.getElementsByClassName("menuWrapper")[0].classList.toggle("change");
-    var x = document.getElementsByClassName("footer");
-    x[0].scrollIntoView(true);
   });
 });
 
@@ -158,6 +155,7 @@ function displayInfo(url, index) {
   });
 }
 
+// get download url of README.md file in storage
 function downloadREADMEFile(storageRef, prjNum) {
   storageRef.child("/" + prjNum + 'README.md').getDownloadURL().then(function(url) {
     displayInfo(url, prjNum);
